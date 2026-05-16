@@ -16,24 +16,23 @@
         </tr>
       </thead>
       <tbody>
-            @for (book of books; track book.id) {
-            <tr>
+        @for (book of books; track book.id) {
+          <tr>
             <td>{{ book.title }}</td>
             <td>{{ book.author }}</td>
             <td>{{ book.publishedDate }}</td>
             <td>
-            <a [routerLink]="['/books/edit', book.id]" class="btn btn-sm btn-warning me-2">
+              <a [routerLink]="['/books/edit', book.id]" class="btn btn-sm btn-warning me-2">
                 <i class="fas fa-edit"></i> Edit
-            </a>
-            <button class="btn btn-sm btn-danger" (click)="delete(book.id!)">
+              </a>
+              <button class="btn btn-sm btn-danger" (click)="delete(book.id!)">
                 <i class="fas fa-trash"></i> Delete
-            </button>
+              </button>
             </td>
-        </tr>
+          </tr>
         } @empty {
-        <tr><td colspan="4">No books found</td></tr>
+          <tr><td colspan="4">No books found</td></tr>
         }
-
       </tbody>
     </table>
   </div>
