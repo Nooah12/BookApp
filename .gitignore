@@ -1,0 +1,11 @@
+# .NET
+BookApi/obj/
+BookApi/bin/
+BookApi/*.db
+BookApi/*.db-shm
+BookApi/*.db-wal
+
+# Angular
+BookApp/node_modules/
+BookApp/.angular/
+BookApp/dist/
