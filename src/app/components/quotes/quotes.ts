@@ -1,11 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgFor, NgIf } from '@angular/common';
 import { QuoteService, Quote } from '../../services/quote';
 
 @Component({
   selector: 'app-quotes',
-  imports: [FormsModule, NgFor, NgIf],
+  imports: [FormsModule],
   templateUrl: './quotes.html',
   styleUrl: './quotes.scss'
 })
@@ -15,15 +14,20 @@ export class Quotes implements OnInit {
   showForm = false;
   editingId: number | null = null;
   private quoteService = inject(QuoteService);
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit() {
-    this.quoteService.getAll().subscribe(q => this.quotes = q);
+    this.quoteService.getAll().subscribe(q => {
+      this.quotes = q;
+      this.cdr.detectChanges();
+    });
   }
 
   submit() {
     this.quoteService.create(this.form).subscribe(q => {
       this.quotes.push(q);
       this.cancelForm();
+      this.cdr.detectChanges();
     });
   }
 
@@ -37,6 +41,7 @@ export class Quotes implements OnInit {
     this.quoteService.update(id, this.form).subscribe(updated => {
       this.quotes = this.quotes.map(q => q.id === id ? updated : q);
       this.cancelForm();
+      this.cdr.detectChanges();
     });
   }
 
@@ -44,6 +49,7 @@ export class Quotes implements OnInit {
     if (confirm('Delete this quote?')) {
       this.quoteService.delete(id).subscribe(() => {
         this.quotes = this.quotes.filter(q => q.id !== id);
+        this.cdr.detectChanges();
       });
     }
   }
