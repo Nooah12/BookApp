@@ -1,0 +1,19 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <h2 class="mb-4">Login</h2>
+      <form (ngSubmit)="login()">
+        <div class="mb-3">
+          <input class="form-control" placeholder="Username" [(ngModel)]="username" name="username" required />
+        </div>
+        <div class="mb-3">
+          <input class="form-control" type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+        </div>
+        <button class="btn btn-primary w-100" type="submit">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <p class="mt-3 text-center">No account? <a routerLink="/register">Register here</a></p>
+      </form>
+    </div>
+  </div>
+</div>
