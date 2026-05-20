@@ -9,12 +9,14 @@
         <li class="nav-item"><a class="nav-link" routerLink="/books" routerLinkActive="active">Books</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/quotes" routerLinkActive="active">My Quotes</a></li>
       </ul>
-      <button class="btn btn-outline-light" (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i> Logout
-      </button>
-      <button class="btn btn-outline-light ms-2" (click)="theme.toggleDarkMode()">
-        <i class="fas fa-adjust"></i> {{ theme.darkMode ? 'Light Mode' : 'Dark Mode' }}
-      </button>
+      <div class="gap-2 d-flex">
+        <button class="btn btn-outline-light ms-2" (click)="theme.toggleDarkMode()">
+          <i class="fas fa-adjust"></i> {{ theme.darkMode ? 'Light Mode' : 'Dark Mode' }}
+        </button>
+        <button class="btn btn-outline-light" (click)="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
     </div>
   </div>
 </nav>
