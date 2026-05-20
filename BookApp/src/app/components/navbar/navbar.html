@@ -12,6 +12,9 @@
       <button class="btn btn-outline-light" (click)="logout()">
         <i class="fas fa-sign-out-alt"></i> Logout
       </button>
+      <button class="btn btn-outline-light ms-2" (click)="theme.toggleDarkMode()">
+        <i class="fas fa-adjust"></i> {{ theme.darkMode ? 'Light Mode' : 'Dark Mode' }}
+      </button>
     </div>
   </div>
 </nav>
