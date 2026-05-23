@@ -3,7 +3,9 @@ import { HttpClient, HttpInterceptorFn } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 
-const API = 'http://localhost:5066/api/auth';
+// const API = 'http://localhost:5066/api/auth'; // local
+const API = 'https://bookapp-sxjz.onrender.com/api/auth'; // production
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

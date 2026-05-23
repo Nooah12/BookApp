@@ -1,7 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-const API = 'http://localhost:5066/api/books';
+// const API = 'http://localhost:5066/api/books'; // local
+const API = 'https://bookapp-sxjz.onrender.com/api/books'; // production
+
 
 export interface Book {
   id?: number;
