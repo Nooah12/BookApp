@@ -1,3 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 @use 'bootstrap/scss/bootstrap';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+
+.min-vh-80 {
+  min-height: 80vh;
+}

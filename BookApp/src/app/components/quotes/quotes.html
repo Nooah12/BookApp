@@ -27,14 +27,16 @@
     <div class="card p-3 mb-2">
       @if (editingId !== quote.id) {
         <p class="mb-1">"{{ quote.text }}"</p>
-        <small class="text-muted">— {{ quote.author }}</small>
-        <div class="mt-2">
-          <button class="btn btn-sm btn-warning me-2" (click)="startEdit(quote)">
-            <i class="fas fa-edit"></i> Edit
-          </button>
-          <button class="btn btn-sm btn-danger" (click)="delete(quote.id!)">
-            <i class="fas fa-trash"></i> Delete
-          </button>
+        <div class="d-flex">
+          <small class="text-muted mt-2">— {{ quote.author }}</small>
+          <div class="mt-2 d-flex gap-2 ms-auto">
+            <button class="btn btn-sm btn-warning" (click)="startEdit(quote)">
+              <i class="fas fa-edit"></i> <span class="d-none d-md-inline">Edit</span>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="delete(quote.id!)">
+              <i class="fas fa-trash"></i> <span class="d-none d-md-inline">Delete</span>
+            </button>
+          </div>
         </div>
       } @else {
         <form (ngSubmit)="saveEdit(quote.id!)">
