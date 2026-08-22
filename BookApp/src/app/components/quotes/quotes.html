@@ -1,57 +1,109 @@
-<div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>My Quotes</h2>
+<div class="container py-4">
+  <div class="page-header">
+    <h2><i class="fas fa-quote-left me-2 text-primary"></i>My Quotes</h2>
     <button class="btn btn-primary" (click)="showForm = !showForm">
-      <i class="fas fa-plus"></i> Add Quote
+      <i class="fas" [class.fa-plus]="!showForm" [class.fa-times]="showForm"></i>
+      {{ showForm ? 'Cancel' : 'Add Quote' }}
     </button>
   </div>
 
   @if (showForm) {
-    <div class="card p-3 mb-4">
+    <div class="quote-form-card">
+      <h5 class="form-title">{{ editingId ? 'Edit quote' : 'New quote' }}</h5>
       <form (ngSubmit)="submit()">
-        <div class="mb-3">
-          <input class="form-control" placeholder="Quote text" [(ngModel)]="form.text" name="text" required />
+        <div class="form-floating mb-3">
+          <textarea
+            class="form-control"
+            id="quoteText"
+            placeholder="Quote text"
+            [(ngModel)]="form.text"
+            name="text"
+            required
+            style="height: 100px; resize: none;"
+          ></textarea>
+          <label for="quoteText">Quote text</label>
         </div>
-        <div class="mb-3">
-          <input class="form-control" placeholder="Author" [(ngModel)]="form.author" name="author" required />
+        <div class="form-floating mb-3">
+          <input
+            class="form-control"
+            id="quoteAuthor"
+            placeholder="Author"
+            [(ngModel)]="form.author"
+            name="author"
+            required
+          />
+          <label for="quoteAuthor"><i class="fas fa-pen-nib me-1"></i>Author</label>
         </div>
-        <button class="btn btn-success me-2" type="submit">
-          <i class="fas fa-save"></i> Save
-        </button>
-        <button class="btn btn-secondary" type="button" (click)="cancelForm()">Cancel</button>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" type="submit">
+            <i class="fas fa-save me-1"></i> Save
+          </button>
+          <button class="btn btn-outline-secondary" type="button" (click)="cancelForm()">
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   }
 
-  @for (quote of quotes; track quote.id) {
-    <div class="card p-3 mb-2">
-      @if (editingId !== quote.id) {
-        <p class="mb-1">"{{ quote.text }}"</p>
-        <div class="d-flex">
-          <small class="text-muted mt-2">— {{ quote.author }}</small>
-          <div class="mt-2 d-flex gap-2 ms-auto">
-            <button class="btn btn-sm btn-warning" (click)="startEdit(quote)">
-              <i class="fas fa-edit"></i> <span class="d-none d-md-inline">Edit</span>
-            </button>
-            <button class="btn btn-sm btn-danger" (click)="delete(quote.id!)">
-              <i class="fas fa-trash"></i> <span class="d-none d-md-inline">Delete</span>
-            </button>
+  <div class="quotes-list">
+    @for (quote of quotes; track quote.id) {
+      <div class="quote-card">
+        @if (editingId !== quote.id) {
+          <span class="quote-mark">"</span>
+          <p class="quote-text">{{ quote.text }}</p>
+          <div class="quote-footer">
+            <span class="quote-author">— {{ quote.author }}</span>
+            <div class="quote-actions">
+              <button class="icon-action" title="Edit" (click)="startEdit(quote)">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="icon-action danger" title="Delete" (click)="delete(quote.id!)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
           </div>
-        </div>
-      } @else {
-        <form (ngSubmit)="saveEdit(quote.id!)">
-          <div class="mb-2">
-            <input class="form-control" [(ngModel)]="form.text" name="editText" required />
-          </div>
-          <div class="mb-2">
-            <input class="form-control" [(ngModel)]="form.author" name="editAuthor" required />
-          </div>
-          <button class="btn btn-sm btn-success me-2" type="submit">Save</button>
-          <button class="btn btn-sm btn-secondary" type="button" (click)="cancelForm()">Cancel</button>
-        </form>
-      }
-    </div>
-  } @empty {
-    <p class="text-muted">No quotes yet, add one!</p>
-  }
+        } @else {
+          <form (ngSubmit)="saveEdit(quote.id!)">
+            <div class="form-floating mb-3">
+              <textarea
+                class="form-control"
+                id="editText"
+                placeholder="Quote text"
+                [(ngModel)]="form.text"
+                name="editText"
+                required
+                style="height: 90px; resize: none;"
+              ></textarea>
+              <label for="editText">Quote text</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                class="form-control"
+                id="editAuthor"
+                placeholder="Author"
+                [(ngModel)]="form.author"
+                name="editAuthor"
+                required
+              />
+              <label for="editAuthor">Author</label>
+            </div>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm" type="submit">
+                <i class="fas fa-save me-1"></i> Save
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" type="button" (click)="cancelForm()">
+                Cancel
+              </button>
+            </div>
+          </form>
+        }
+      </div>
+    } @empty {
+      <div class="empty-state">
+        <i class="fas fa-quote-left"></i>
+        <p>No quotes yet — save something inspiring!</p>
+      </div>
+    }
+  </div>
 </div>
