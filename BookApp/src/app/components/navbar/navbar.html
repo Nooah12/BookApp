@@ -1,22 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand" href="#">BookApp</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" routerLink="/books" routerLinkActive="active">Books</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/quotes" routerLinkActive="active">My Quotes</a></li>
-      </ul>
-      <div class="gap-2 d-flex">
-        <button class="btn btn-outline-light ms-2" (click)="theme.toggleDarkMode()">
-          <i class="fas fa-adjust"></i> {{ theme.darkMode ? 'Light Mode' : 'Dark Mode' }}
-        </button>
-        <button class="btn btn-outline-light" (click)="logout()">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-      </div>
+<nav class="app-navbar">
+  <div class="container nav-inner">
+    <a class="nav-brand" routerLink="/books">
+      <i class="fas fa-book-open"></i>
+      <span>BookShelf</span>
+    </a>
+
+    <div class="nav-links">
+      <a class="nav-link" routerLink="/books" routerLinkActive="active">
+        <i class="fas fa-books"></i> Books
+      </a>
+      <a class="nav-link" routerLink="/quotes" routerLinkActive="active">
+        <i class="fas fa-quote-left"></i> Quotes
+      </a>
+    </div>
+
+    <div class="nav-actions">
+      <button class="icon-btn" (click)="theme.toggleDarkMode()" [title]="theme.darkMode ? 'Light mode' : 'Dark mode'">
+        <i class="fas" [class.fa-sun]="theme.darkMode" [class.fa-moon]="!theme.darkMode"></i>
+      </button>
+      <button class="btn btn-outline-primary btn-sm" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
     </div>
   </div>
 </nav>
