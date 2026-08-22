@@ -14,4 +14,7 @@ export class Navbar {
   logout() { this.auth.logout(); }
 
   theme = inject(Theme);
+  menuOpen = false;
+  toggleMenu() { this.menuOpen = !this.menuOpen; }
+  closeMenu() { this.menuOpen = false; }
 }

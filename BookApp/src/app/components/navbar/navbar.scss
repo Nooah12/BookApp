@@ -93,3 +93,96 @@
     transform: rotate(15deg);
   }
 }
+
+// --- Hamburger ---
+.mobile-right {
+  margin-left: auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hamburger {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0;
+  transition: border-color var(--transition);
+
+  span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  &.open {
+    border-color: var(--primary);
+
+    span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: var(--primary); }
+    span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: var(--primary); }
+  }
+
+  &:hover {
+    border-color: var(--primary);
+    span { background: var(--primary); }
+  }
+}
+
+// --- Mobile menu ---
+.mobile-menu {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 1px solid transparent;
+
+  &.open {
+    max-height: 300px;
+    border-top-color: var(--border);
+  }
+}
+
+.mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  width: 100%;
+  transition: color var(--transition), background var(--transition);
+  cursor: pointer;
+
+  i { width: 16px; text-align: center; }
+
+  &:hover, &.active {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.06);
+  }
+
+  &.active { font-weight: 600; }
+
+  &.logout {
+    color: #ef4444;
+    &:hover { color: #ef4444; background: rgba(239, 68, 68, 0.06); }
+  }
+
+  & + & {
+    border-top: 1px solid var(--border);
+  }
+}
